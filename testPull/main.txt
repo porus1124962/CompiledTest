@@ -1,0 +1,114 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:karachi_hills_project/Screen/auth/splash_Screen.dart';
+import 'package:karachi_hills_project/provider/agentSubmitDetailsView_provider.dart';
+import 'package:karachi_hills_project/provider/agent_profile_provider.dart';
+import 'package:karachi_hills_project/provider/agent_register.dart';
+import 'package:karachi_hills_project/provider/agent_rl_provider.dart';
+import 'package:karachi_hills_project/provider/bankList_provider.dart';
+import 'package:karachi_hills_project/provider/city_provider.dart';
+import 'package:karachi_hills_project/provider/country_provider.dart';
+import 'package:karachi_hills_project/provider/feedback_GetIssueTypes_Provider.dart';
+import 'package:karachi_hills_project/provider/getAppliedMembershpDetails_Provider.dart';
+import 'package:karachi_hills_project/provider/getIssuesList_provider.dart';
+import 'package:karachi_hills_project/provider/getMembershipFormNew_Provider.dart';
+import 'package:karachi_hills_project/provider/notifications_provider.dart';
+import 'package:karachi_hills_project/provider/profileInfo_Provider.dart';
+import 'package:karachi_hills_project/provider/agent_request_provider.dart';
+import 'package:karachi_hills_project/provider/agent_user_provider.dart';
+import 'package:karachi_hills_project/provider/allRequests_provider.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:karachi_hills_project/provider/appSubmittedOnCnic_Provider.dart';
+import 'package:karachi_hills_project/provider/auth_provider.dart';
+import 'package:karachi_hills_project/provider/check_membership_form_provider.dart';
+import 'package:karachi_hills_project/provider/draftDataProvider.dart';
+import 'package:karachi_hills_project/provider/dropdown_membershipProvider.dart';
+import 'package:karachi_hills_project/provider/form_details.dart';
+import 'package:karachi_hills_project/provider/get_Membership_Forms_provider.dart';
+import 'package:karachi_hills_project/provider/remaining_count_Provider.dart';
+import 'package:karachi_hills_project/provider/request_data_provider.dart';
+import 'package:karachi_hills_project/provider/singleIssueDetail_provider.dart';
+import 'package:karachi_hills_project/provider/staffAgent_profile_provider.dart';
+import 'package:karachi_hills_project/provider/staffProfile_provider.dart';
+import 'package:karachi_hills_project/provider/staff_list_provider.dart';
+import 'package:karachi_hills_project/provider/userInfo_Provider.dart';
+import 'package:provider/provider.dart';
+import 'package:karachi_hills_project/provider/utilProvider.dart';
+
+import 'Screen/views/agent/agent_submitFormDetails.dart';
+import 'Screen/views/agent/bankList.dart';
+import 'Screen/views/customer/onboardingCustomer.dart';
+import 'Screen/views/selectedView/listOfPlots_provider.dart';
+import 'Screen/views/selectedView/listViewSelected.dart';
+
+void main() {
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    statusBarColor: Colors.transparent,
+    statusBarBrightness: Brightness.light,
+    statusBarIconBrightness: Brightness.light,
+    // systemNavigationBarColor: AppColors.PRIMARY_COLOR,
+  ));
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(new MyApp());
+  });
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => UserInfoProvider()),
+        ChangeNotifierProvider(create: (_) => FormDetails()),
+        ChangeNotifierProvider(create: (_) => UserAllRequestsProvider()),
+        ChangeNotifierProvider(create: (_) => RequestDataProvider()),
+        ChangeNotifierProvider(create: (_) => DropdownProvider()),
+        ChangeNotifierProvider(create: (_) => GetMembershipFormsProvider()),
+        ChangeNotifierProvider(create: (_) => DraftDataProvider()),
+        ChangeNotifierProvider(
+            create: (_) => CheckRegistrationCountsProvider()),
+        ChangeNotifierProvider(create: (_) => AgentUserProvider()),
+        ChangeNotifierProvider(create: (_) => AgentRequestProvider()),
+        ChangeNotifierProvider(create: (_) => AppFormSubmittedOnCnicProvider()),
+        ChangeNotifierProvider(create: (_) => UtilProvider()),
+        ChangeNotifierProvider(
+            create: (_) => GetAppliedMembershpDetailsProvider()),
+        ChangeNotifierProvider(create: (_) => AgentReqListProvider()),
+        ChangeNotifierProvider(create: (_) => GetRegistrationProvider()),
+        ChangeNotifierProvider(create: (_) => AgentProfileProvider()),
+        ChangeNotifierProvider(create: (_) => GetMembershipFormsNewProvider()),
+        ChangeNotifierProvider(create: (_) => ProfileInfoProvider()),
+        ChangeNotifierProvider(create: (_) => StaffProfileProvider()),
+        ChangeNotifierProvider(create: (_) => AgentStaffListProvider()),
+        ChangeNotifierProvider(create: (_) => StaffProAgentProvider()),
+        ChangeNotifierProvider(create: (_) => AgentSubmitDetailsViewProvider()),
+        ChangeNotifierProvider(create: (_) => FeedBackGetIssueTypesProvider()),
+        ChangeNotifierProvider(create: (_) => GetIssueProvider()),
+        ChangeNotifierProvider(create: (_) => SingleIssueDetailProvider()),
+        ChangeNotifierProvider(create: (_) => NotificationsProvider()),
+        ChangeNotifierProvider(create: (_) => BankListProvider()),
+        ChangeNotifierProvider(create: (_) => CountryProvider()),
+        ChangeNotifierProvider(create: (_) => CityProvider()),
+        ChangeNotifierProvider(create: (_) => RemainingFormSubmittedOnCnicProvider()),
+        ChangeNotifierProvider(create: (_) => ListOfPlotsProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        builder: EasyLoading.init(),
+        theme: ThemeData(
+          appBarTheme: AppBarTheme(
+            backwardsCompatibility: false, // 1
+            systemOverlayStyle: SystemUiOverlayStyle.light,
+          ),
+          fontFamily: 'NexaBold',
+          primarySwatch: Colors.orange,
+        ),
+        home: SplashScreen(),
+      ),
+    );
+  }
+}
+
